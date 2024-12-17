@@ -1,18 +1,17 @@
 import asyncio
-from aiogram import Bot, Dispatcher
-from dotenv import dotenv_values
 
+from bot_config import dp , bot , db_manager
 from handlers.order import order_router
 from handlers.info_command import command_router
 from handlers.menu import menu_router
 from handlers.messages import message_router
-from handlers.review_dialog import review_router
+from handlers.review_dialog import review_router, db_manager
 from handlers.start import start_router
 
 
-token = dotenv_values(".env")["BOT_TOKEN"]
-bot = Bot(token=token)
-dp = Dispatcher()
+
+async def on_startup(bot):
+    db_manager.create_table()
 
 
 async def main():
@@ -22,6 +21,9 @@ async def main():
     dp.include_router(menu_router) #ДЗ"№2
     dp.include_router(order_router) #ДЗ"№2
     dp.include_router(review_router) #ДЗ"№3
+
+    dp.startup.register(on_startup)
+
     await dp.start_polling(bot)
 
 
