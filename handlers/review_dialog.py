@@ -1,8 +1,8 @@
 from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
 from handlers.db_manager import DatabaseManager
+from aiogram.fsm.state import StatesGroup, State
 
 review_router = Router()
 
@@ -33,7 +33,7 @@ async def save_name(message: types.Message, state: FSMContext):
 @review_router.message(RestaurantReview.phone_number)
 async def save_phone(message: types.Message, state: FSMContext):
     await state.update_data(phone_number=message.text.strip())
-    # Кнопки для оценки еды
+
     kb = types.ReplyKeyboardMarkup(
         keyboard=[
             [types.KeyboardButton(text='bad')],
@@ -47,10 +47,8 @@ async def save_phone(message: types.Message, state: FSMContext):
 
 @review_router.message(RestaurantReview.food_rating)
 async def save_food_rating(message: types.Message, state: FSMContext):
-    # Проверяем, что выбрана одна из кнопок
     if message.text in ('bad', 'good'):
         await state.update_data(food_rating=message.text)
-        # Удаляем клавиатуру и переходим к следующему вопросу
         await message.answer("Как вы оцениваете чистоту заведения (1-5)?", reply_markup=types.ReplyKeyboardRemove())
         await state.set_state(RestaurantReview.cleanliness_rating)
     else:
