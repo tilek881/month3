@@ -36,8 +36,8 @@ async def save_phone(message: types.Message, state: FSMContext):
 
     kb = types.ReplyKeyboardMarkup(
         keyboard=[
-            [types.KeyboardButton(text='bad')],
-            [types.KeyboardButton(text='good')]
+            [types.KeyboardButton(text='bad')], #кнопка1
+            [types.KeyboardButton(text='good')] #кнопка2
         ],
         resize_keyboard=True,
         one_time_keyboard=True
@@ -47,7 +47,7 @@ async def save_phone(message: types.Message, state: FSMContext):
 
 @review_router.message(RestaurantReview.food_rating)
 async def save_food_rating(message: types.Message, state: FSMContext):
-    if message.text in ('bad', 'good'):
+    if message.text in ('bad', 'good'): 
         await state.update_data(food_rating=message.text)
         await message.answer("Как вы оцениваете чистоту заведения (1-5)?", reply_markup=types.ReplyKeyboardRemove())
         await state.set_state(RestaurantReview.cleanliness_rating)
