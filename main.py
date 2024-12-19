@@ -1,17 +1,18 @@
 import asyncio
 
-from bot_config import dp , bot , db_manager
+
 from handlers.order import order_router
 from handlers.info_command import command_router
 from handlers.menu import menu_router
 from handlers.messages import message_router
-from handlers.review_dialog import review_router, db_manager
+from handlers.review_dialog import review_router, manager_db
 from handlers.start import start_router
-
+from bot_config import dp, bot,  manager
 
 
 async def on_startup(bot):
-    db_manager.create_table()
+    manager.create_table()
+
 
 
 async def main():
