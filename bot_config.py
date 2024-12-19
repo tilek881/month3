@@ -21,6 +21,3 @@ manager.create_table()
 
 
 
-
-
-

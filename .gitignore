@@ -67,6 +67,7 @@ db.sqlite3-journal
 reviews_w.db
 review.db
 
+
 # Flask stuff:
 instance/
 .webassets-cache

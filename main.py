@@ -5,7 +5,7 @@ from handlers.order import order_router
 from handlers.info_command import command_router
 from handlers.menu import menu_router
 from handlers.messages import message_router
-from handlers.review_dialog import review_router, manager_db
+from handlers.review_dialog import review_router
 from handlers.start import start_router
 from bot_config import dp, bot,  manager
 
