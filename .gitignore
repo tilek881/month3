@@ -62,11 +62,10 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
-reviews_w.db
-review.db
-menu.db
+*.sqlite3
+*.sqlite3-journal
+*.db
+
 
 # Flask stuff:
 instance/

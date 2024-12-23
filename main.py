@@ -8,12 +8,11 @@ from handlers.messages import message_router
 from handlers.review_dialog import review_router
 from handlers.start import start_router
 from handlers.admin_menu import admin_router
-from bot_config import dp, bot,  manager
+from bot_config import dp, bot, manager
 
 
 async def on_startup(bot):
-    manager.create_menu_table()
-    manager.create_table()
+    manager.create_tables()
 
 
 

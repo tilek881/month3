@@ -2,11 +2,12 @@ from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-from manager_db import Database
+# from manager_db import Database
+from bot_config import manager
 
 
 admin_router = Router()
-admin = Database("menu.db")
+
 
 admin_router.message.filter(F.from_user.id == 1559232214)
 admin_router.callback_query.filter(F.from_user.id == 1559232214)
@@ -65,7 +66,7 @@ async def set_dish_category(message: types.Message, state: FSMContext):
     data = await state.get_data()
 
 
-    admin.insert_dish(
+    manager.insert_dish(
         name=data['name'],
         price=data['price'],
         description=data['description'],

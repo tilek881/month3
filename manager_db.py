@@ -1,11 +1,10 @@
 import sqlite3
 
-
 class Database:
     def __init__(self, db_path):
         self.db_path = db_path
 
-    def create_table(self):
+    def create_tables(self):
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('''
@@ -16,6 +15,15 @@ class Database:
                     food_quality TEXT NOT NULL,
                     cleanliness INTEGER NOT NULL,
                     extra_comments TEXT
+                )
+            ''')
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS menu (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT NOT NULL,
+                    price INTEGER NOT NULL,
+                    description TEXT NOT NULL,
+                    category TEXT NOT NULL
                 )
             ''')
             conn.commit()
@@ -35,20 +43,6 @@ class Database:
             cursor.execute('SELECT * FROM reviews')
             return cursor.fetchall()
 
-    def create_menu_table(self):
-        with sqlite3.connect(self.db_path) as conn:
-            cursor = conn.cursor()
-            cursor.execute('''
-                CREATE TABLE IF NOT EXISTS menu (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    name TEXT NOT NULL,
-                    price INTEGER NOT NULL,
-                    description TEXT NOT NULL,
-                    category TEXT NOT NULL
-                )
-            ''')
-            conn.commit()
-
     def insert_dish(self, name, price, description, category):
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -57,3 +51,9 @@ class Database:
                 VALUES (?, ?, ?, ?)
             ''', (name, price, description, category))
             conn.commit()
+
+    def fetch_all_dishes(self):
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('SELECT * FROM menu')
+            return cursor.fetchall()
