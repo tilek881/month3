@@ -7,11 +7,14 @@ from handlers.menu import menu_router
 from handlers.messages import message_router
 from handlers.review_dialog import review_router
 from handlers.start import start_router
+from handlers.admin_menu import admin_router
 from bot_config import dp, bot,  manager
 
 
 async def on_startup(bot):
+    manager.create_menu_table()
     manager.create_table()
+
 
 
 
@@ -22,6 +25,8 @@ async def main():
     dp.include_router(menu_router) #ДЗ"№2
     dp.include_router(order_router) #ДЗ"№2
     dp.include_router(review_router) #ДЗ"№3
+    dp.include_router(admin_router)
+
 
     dp.startup.register(on_startup)
 

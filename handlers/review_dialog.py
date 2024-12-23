@@ -80,6 +80,8 @@ async def save_extra_comments(message: types.Message, state: FSMContext):
         cleanliness=data['cleanliness_rating'],
         comments=data['extra_comments']
     )
+    await message.answer("Ваш отзыв сохранен. Спасибо!")
+
 
     review_summary = (
         f"Спасибо за ваш отзыв!\n\n"
