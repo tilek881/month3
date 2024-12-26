@@ -2,7 +2,6 @@ from aiogram import Router, types, F
 from aiogram.filters import Command
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.fsm.context import FSMContext
-# from manager_db import Database
 from bot_config import manager
 
 
@@ -82,5 +81,4 @@ async def set_dish_category(message: types.Message, state: FSMContext):
         reply_markup=types.ReplyKeyboardRemove()
 
     )
-    await state.set_state(Dish.category)
     await state.clear()

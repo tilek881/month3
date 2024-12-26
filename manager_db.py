@@ -52,7 +52,7 @@ class Database:
             ''', (name, price, description, category))
             conn.commit()
 
-    def fetch_all_dishes(self):
+    def dishes(self):
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute('SELECT * FROM menu')
