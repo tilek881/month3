@@ -5,7 +5,7 @@ import random
 message_router = Router()
 
 
-NAMES = ("Алексей", "Мария", "Иван", "София", "Дмитрий", "Анна")
+NAMES = ("Абду", "Нейзи", "Кайрат", "Могила", "Тилек", "Анна")
 
 @message_router.message(Command("random"))
 async def random_command(message: types.Message):

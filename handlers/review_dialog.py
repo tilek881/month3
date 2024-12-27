@@ -2,12 +2,10 @@ from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from manager_db import Database
 
-
+from bot_config import manager
 
 review_router = Router()
-manager_db = Database("review.db")
 
 class RestaurantReview(StatesGroup):
     name = State()
@@ -75,7 +73,7 @@ async def save_extra_comments(message: types.Message, state: FSMContext):
     await state.update_data(extra_comments=message.text.strip())
     data = await state.get_data()
 
-    manager_db.insert_review(
+    manager.insert_review(
         name=data['name'],
         contact=data['phone_number'],
         food_quality=data['food_rating'],
